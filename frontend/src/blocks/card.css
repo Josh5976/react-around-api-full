@@ -1,0 +1,114 @@
+.card {
+    width: 282px;
+    max-width: 282px;
+    flex-grow: 1;
+    border-radius: 10px;
+    background-color: #FFF;
+    color: #000;
+    margin-left: auto;
+    z-index: 0;
+    position: relative;
+}
+
+.card:nth-of-type(2n){
+    margin-left: 0;
+}
+
+.card__trash {
+    background-image: url("../images/trash_button.svg");
+    background-size: cover;
+    width: 18px;
+    height: 19.3px;
+    z-index: 100;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    top: 18px;
+    right: 15px;
+    cursor: pointer;
+    transition: opacity .3s ease;
+    position: absolute;
+    display: none;
+}
+
+.card__trash_enabled {
+    display: block;
+}
+
+.card__trash:hover{
+    opacity: .6;
+}
+
+@media screen and (max-width: 580px) {
+    .card{
+        margin-left: 0;
+    }
+}
+
+.card__image {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 282px;
+    cursor: pointer;
+}
+
+.card__info {
+    display: flex;
+    max-width: 246px;
+    margin: 25px auto 31px auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card__info-likes {
+    margin: 0;
+    padding-top: 3px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.card__info-title {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 220px;
+}
+
+.card__info-button {
+    padding: 0;
+    border: none;
+    width: 21px;
+    height: 19px;
+    cursor: pointer;
+    transition: opacity .3s;
+    background-image: url("../images/like_icon.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.card__info-button:hover {
+    opacity: .5;
+}
+
+.card__info-button_active {
+    background-image: url("../images/active_like.svg");
+    opacity: 1;
+}

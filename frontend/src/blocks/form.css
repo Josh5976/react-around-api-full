@@ -1,0 +1,124 @@
+.form {
+    max-width: 358px;
+    margin: 34px auto 36.51px;
+}
+
+.form__info {
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+.form__info-title {
+    margin: 0;
+    color: #000;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 54px;
+    max-height: 23px;
+}
+
+.form__info-input {
+    width: 100%;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    text-decoration: none;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2;
+    padding-bottom: 13.26px;
+    max-height: 14px;
+    z-index: 100;
+}
+
+.form__info-input:nth-child(4) {
+    margin-top: 29.74px;
+}
+
+.form__info-button {
+    width: 100%;
+    height: 50.15px;
+    background-color: #000;
+    border: none;
+    color: #FFF;
+    margin-top: 48px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    transition: opacity .4s ease;
+    padding: 0;
+}
+
+.form__info-button:hover {
+    opacity: .8;
+}
+
+.form__info_error_visible {
+    color: #FF0000;
+}
+
+.form__info-input_type_error {
+    border-color: #FF0000;
+    margin-bottom: 5px;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.form__info-button_disabled {
+    opacity: .2;
+    cursor: auto;
+}
+
+.form__info-button_disabled:hover {
+    opacity: .2;
+}
+
+.form__info-title_type_delete {
+    margin-bottom: 38px;
+}
+
+.form__info-button_type_delete {
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 565px) {
+    .form {
+        max-width: 238px;
+        margin: 25px auto;
+    }
+    .form__info-title {
+        font-size: 18px;
+        margin-bottom: 76px;
+    }
+    .form__info-button {
+        height: 46px;
+        margin-top: 46px;
+        font-size: 14px;
+    }
+    .form__info-input {
+        font-size: 14px;
+        padding-bottom: 9px;
+    }
+    .form__info-input:first-child {
+        margin-bottom: 30px;
+    }
+    .form__info-button_type_delete {
+        margin-top: 0px;
+    }
+    .form__info-title_type_delete {
+        margin-bottom: 38px;
+    }
+}

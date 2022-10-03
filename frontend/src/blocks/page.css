@@ -1,0 +1,19 @@
+.page {
+    max-width: 100%;
+    background-color: #000;
+    min-height: 100vh;
+    color: #FFF;
+    z-index: 1;
+}
+
+.page__content {
+    max-width: 880px;
+    margin: 40px auto 58px;
+}
+
+@media screen and (max-width: 565px) {
+    .page__content {
+        margin-top: 42px;
+        margin-bottom: 50px;
+    }
+}

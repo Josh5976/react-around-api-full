@@ -1,0 +1,76 @@
+.header {
+  max-width: 880px;
+  margin: 0 auto;
+  padding-top: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
+  padding-bottom: 41px;
+}
+
+/*.header__image {
+    
+} */
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__user {
+  margin: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+}
+
+.header__logout {
+  background: transparent;
+  border: none;
+  color: #a9a9a9;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+}
+
+.header__logout:hover {
+  opacity: 0.7;
+  transition: opacity 0.4s ease;
+}
+
+.header__auth-link {
+  text-decoration: none;
+  color: #fff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+}
+
+.header__auth-link:hover {
+  opacity: 0.6;
+  transition: opacity .4s ease;
+}
+
+.header__icon {
+  display: none;
+}
+
+@media screen and (max-width: 565px) {
+  .header__image {
+    padding-left: 27px;
+    max-width: 126px;
+    padding-bottom: 32px;
+  }
+
+  .header {
+    padding-top: 28px;
+  }
+}
