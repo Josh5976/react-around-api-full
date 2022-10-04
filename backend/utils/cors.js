@@ -3,7 +3,7 @@ const allowedCors = [
   'https://www.aroundnation.students.nomoredomainssbs.ru/',
   'https://www.aroundnation.students.nomoredomainssbs.ru/',
   'http://localhost:3000',
-  'localhost:3000'
+  'localhost:3000',
 ];
 
 // const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
