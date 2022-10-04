@@ -5,7 +5,7 @@ const routes = require('./routes');
 const cors = require('cors');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-const { allowedCors, DEFAULT_ALLOWED_METHODS } = require('./utils/cors');
+// const { allowedCors, DEFAULT_ALLOWED_METHODS } = require('./utils/cors');
 
 const { requestLogger, errorLogger } = require('./middleware/logger');
 const errorHandling = require('./middleware/error-handler');

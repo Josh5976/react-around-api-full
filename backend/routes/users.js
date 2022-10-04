@@ -7,7 +7,6 @@ const {
 } = require('../controllers/users');
 
 const {
-  validateUserBody,
   validateProfile,
   validateObjId,
   validateAvatar,
