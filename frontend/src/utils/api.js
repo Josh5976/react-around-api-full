@@ -97,8 +97,8 @@ class Api {
 }
 
 const BASE_URL =
-  process.env.NODE_ENV !== 'production'
-    ? "https:localhost:3001"
+  process.env.NODE_ENV !== "production"
+    ? "https:localhost:3000"
     : "https://api.aroundnation.students.nomoredomainssbs.ru";
 
 const api = new Api({

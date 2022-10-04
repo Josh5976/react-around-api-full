@@ -10,7 +10,7 @@ const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 const errorHandling = require('./middleware/error-handler');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/aroundb', {
