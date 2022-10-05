@@ -32,7 +32,7 @@ const createUser = (req, res, next) => {
           'The user with the provided email already exists'
         );
       } else {
-        return bcrypt.ahs(password, 10);
+        return bcrypt.hash(password, 10);
       }
     })
     .then((hash) =>

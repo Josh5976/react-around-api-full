@@ -4,13 +4,14 @@ const BASE_URL =
     : "https://api.aroundnation.students.nomoredomainssbs.ru";
 
 const handleResponse = (res) => {
-  //if (res.ok) {
-    //return res.json();
-    console.log(res)
+  // if (res.ok) {
+  //   return res.json();
+  console.log(res);
     
- // }
+    
+  // }
 
-  //return Promise.reject(`Error: ${res.status}`);
+  // return Promise.reject(`Error: ${res.status}`);
 };
 
 export const register = (email, password) => {
