@@ -59,10 +59,12 @@ function App() {
 
   React.useEffect(() => {
     const token = localStorage.getItem("jwt");
+    console.log(token);
     if (token) {
       auth
         .checkToken(token)
         .then((res) => {
+          console.log(res)
           if (res) {
             setEmail(res.data.email);
             setIsLoggedIn(true);
@@ -215,6 +217,7 @@ function App() {
   }
 
   function onLogin({ email, password }) {
+    console.log(email);
     auth
       .login(email, password)
       .then((res) => {
