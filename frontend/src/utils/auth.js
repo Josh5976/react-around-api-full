@@ -1,7 +1,7 @@
-const BASE_URL = 'http://localhost:3001';
-  // process.env.NODE_ENV !== "production"
-  //   ? "http:localhost:3001"
-  //   : "https://api.aroundnation.students.nomoredomainssbs.ru";
+const BASE_URL =
+  process.env.NODE_ENV !== "production"
+    ? "http:localhost:3001"
+    : "https://api.aroundnation.students.nomoredomainssbs.ru";
 
 const handleResponse = (res) => {
   if (res.ok) {
@@ -19,7 +19,7 @@ export const register = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then(handleResponse)
+  }).then(handleResponse);
 };
 
 export const login = (email, password) => {

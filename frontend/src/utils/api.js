@@ -59,7 +59,7 @@ class Api {
   addCard(data, token) {
     return fetch(`${this._url}/cards`, {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       method: "POST",
@@ -70,7 +70,7 @@ class Api {
   deleteCard(id, token) {
     return fetch(`${this._url}/cards/${id}`, {
       headers: {
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       method: "DELETE",
     }).then(this._handleResponse);
@@ -103,8 +103,7 @@ const BASE_URL =
     : "https://api.aroundnation.students.nomoredomainssbs.ru";
 
 const api = new Api({
-  // baseUrl: BASE_URL,
-  baseUrl: "http://localhost:3001",
+  baseUrl: BASE_URL,
 });
 
 export default api;
