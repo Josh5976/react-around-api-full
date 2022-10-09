@@ -14,7 +14,8 @@ class Api {
   getUser(token) {
     return fetch(`${this._url}/users/me`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
     }).then(this._handleResponse);
   }
@@ -22,7 +23,7 @@ class Api {
   changeUser({ userName, userOccupation }, token) {
     return fetch(`${this._url}/users/me`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       method: "PATCH",
@@ -36,7 +37,7 @@ class Api {
   changeAvatar({ avatar }, token) {
     return fetch(`${this._url}/users/me/avatar`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       method: "PATCH",
@@ -49,7 +50,7 @@ class Api {
   getInitialCards(token) {
     return fetch(`${this._url}/cards`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       method: "GET",
     }).then(this._handleResponse);
@@ -58,7 +59,7 @@ class Api {
   addCard(data, token) {
     return fetch(`${this._url}/cards`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       method: "POST",
@@ -69,16 +70,16 @@ class Api {
   deleteCard(id, token) {
     return fetch(`${this._url}/cards/${id}`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
       method: "DELETE",
     }).then(this._handleResponse);
   }
 
   addLike(id, token) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       method: "PUT",
@@ -86,9 +87,9 @@ class Api {
   }
 
   deleteLike(id, token) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       method: "DELETE",
@@ -97,13 +98,13 @@ class Api {
 }
 
 const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https:localhost:3000"
+  process.env.NODE_ENV !== "production"
+    ? "http:localhost:3001"
     : "https://api.aroundnation.students.nomoredomainssbs.ru";
 
 const api = new Api({
-  //baseUrl: "https://api.aroundnation.students.nomoredomainssbs.ru/",
-  baseUrl: BASE_URL,
+  // baseUrl: BASE_URL,
+  baseUrl: "http://localhost:3001",
 });
 
 export default api;

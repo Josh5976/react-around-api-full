@@ -13,8 +13,18 @@ function Main({
   onCardLikeClick,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
+  const [userInfo, setUserInfo] = React.useState({});
 
-  const imageStyle = { backgroundImage: `url(${currentUser.avatar})` };
+
+  React.useEffect(() => {
+    setUserInfo({
+      name: currentUser.name,
+      about: currentUser.about,
+      avatar: currentUser.avatar
+    })
+  }, [currentUser])
+
+  const imageStyle = { backgroundImage: `url(${userInfo.avatar})` };
 
   return (
     <main className="page__content">
@@ -35,13 +45,13 @@ function Main({
           </div>
         </div>
         <div className="profile__info">
-          <h1 className="profile__info-title">{currentUser.name}</h1>
+          <h1 className="profile__info-title">{userInfo.name}</h1>
           <button
             className="profile__info-button"
             type="button"
             onClick={onEditProfileClick}
           ></button>
-          <p className="profile__info-subtitle">{currentUser.about}</p>
+          <p className="profile__info-subtitle">{userInfo.about}</p>
         </div>
         <button
           className="profile__button"
@@ -52,7 +62,7 @@ function Main({
       <section className="elements" id="elements">
         {cards.map((card, i) => (
           <Card
-            key={card._id}
+            key={i}
             card={card}
             onCardClick={onCardImageClick}
             onDeleteClick={onDeleteCardClick}

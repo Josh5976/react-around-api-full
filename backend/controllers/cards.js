@@ -2,6 +2,7 @@ const Card = require('../models/card');
 
 const ForbiddenError = require('../errors/ForbiddenError');
 const NotFoundError = require('../errors/NotFoundError');
+const BadRequestError = require('../errors/BadRequestError');
 
 const getCards = (req, res, next) => {
   Card.find({})
@@ -17,7 +18,13 @@ const createCard = (req, res, next) => {
     .then((card) => {
       res.status(201).send({ data: card });
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError(`${Object.values(err.errors).map((error) => error.message)}`))
+      } else {
+        next(err);
+      }
+    });
 };
 
 const deleteCard = (req, res, next) => {
@@ -33,22 +40,36 @@ const deleteCard = (req, res, next) => {
     });
 };
 
-const updateLike = (req, res, next, method) => {
-  const { id } = req.params;
-
-  Card.findByIdAndUpdate(
-    id,
-    { [method]: { likes: req.user._id } },
-    { new: true }
-  )
-    .orFail(() => new NotFoundError('Card ID not found'))
-    .then((card) => {
-      res.send({ data: card });
-    })
-    .catch(next);
+const likeCard = (req, res, next) => {
+  Card
+    .findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { likes: req.user._id } },
+      { new: true }
+    )
+    .orFail()
+    .then((card) => res.send(card))
+    .catch((err) => {
+      err.name === 'DocumentNotFoundError'
+        ? next(new NotFoundError('Could not find requested card'))
+        : next(err);
+    });
 };
 
-const likeCard = (req, res) => updateLike(req, res, '$addToSet');
-const dislikeCard = (req, res) => updateLike(req, res, '$pull');
+const dislikeCard = (req, res, next) => {
+  Card
+    .findByIdAndUpdate(
+      req.params.id,
+      { $pull: { likes: req.user._id } },
+      { new: true }
+    )
+    .orFail()
+    .then((card) => res.send(card))
+    .catch((err) => {
+      err.name === 'DocumentNotFoundError'
+        ? next(new NotFoundError('Could not find requested card'))
+        : next(err);
+    });
+};
 
 module.exports = { getCards, createCard, deleteCard, likeCard, dislikeCard };

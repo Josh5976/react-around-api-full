@@ -58,21 +58,33 @@ const createUser = (req, res, next) => {
     });
 };
 
-const getUsers = (req, res) => {
+const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.status(200).send(users))
     .catch((err) => next(err));
 };
 
-const getUser = (req, res) => {
+const getUser = (req, res, next) => {
   const { id } = req.params;
 
   User.findById(id)
     .orFail(() => {
-      throw new NotFoundError('No user found for specified id');
+      throw new notFoundError('No user found for specified id');
     })
     .then((user) => {
       return res.status(200).send(user);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const getCurrentUser = (req, res, next) => {
+  const currentUserId = req.user._id;
+  User.findOne({ _id: currentUserId })
+    .orFail(new notFoundError('User ID not found'))
+    .then((user) => {
+      res.send(user);
     })
     .catch((err) => {
       next(err);
@@ -129,4 +141,5 @@ module.exports = {
   updateUserAvatar,
   updateUserInfo,
   login,
+  getCurrentUser
 };

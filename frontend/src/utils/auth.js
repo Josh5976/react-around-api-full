@@ -1,13 +1,11 @@
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https:localhost:3000"
-    : "https://api.aroundnation.students.nomoredomainssbs.ru";
+const BASE_URL = 'http://localhost:3001';
+  // process.env.NODE_ENV !== "production"
+  //   ? "http:localhost:3001"
+  //   : "https://api.aroundnation.students.nomoredomainssbs.ru";
 
 const handleResponse = (res) => {
   if (res.ok) {
     return res.json();
-    
-    
   }
 
   return Promise.reject(`Error: ${res.status}`);
@@ -45,9 +43,8 @@ export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(handleResponse)
+  }).then(handleResponse);
 };

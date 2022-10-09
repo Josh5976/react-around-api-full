@@ -36,7 +36,7 @@ function App() {
 
   React.useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (token && isLoggedIn) {
+    if (isLoggedIn) {
       api
         .getUser(token)
         .then((userData) => {
@@ -48,26 +48,23 @@ function App() {
       api
         .getInitialCards(token)
         .then((cardData) => {
-          setCards(cardData);
+          setCards(cardData.data);
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }, [isLoggedIn]);
-    
 
   React.useEffect(() => {
     const token = localStorage.getItem("jwt");
-    console.log(token);
     if (token) {
       auth
         .checkToken(token)
         .then((res) => {
-          console.log(res)
           if (res) {
-            setEmail(res.data.email);
             setIsLoggedIn(true);
+            setEmail(res.email);
             navigate("/");
           } else {
             localStorage.removeItem("jwt");
@@ -89,6 +86,8 @@ function App() {
     return () => document.removeEventListener("keydown", closeByEscape);
   }, []);
 
+
+
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
   }
@@ -108,12 +107,15 @@ function App() {
   function handleUpdateUser(userUpdate) {
     const token = localStorage.getItem("jwt");
     api
-      .changeUser({
-        userName: userUpdate.name,
-        userOccupation: userUpdate.about,
-      }, token)
+      .changeUser(
+        {
+          userName: userUpdate.name,
+          userOccupation: userUpdate.about,
+        },
+        token
+      )
       .then((userData) => {
-        setCurrentUser(userData);
+        setCurrentUser(userData.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -126,7 +128,7 @@ function App() {
     api
       .changeAvatar(avatarUpdate, token)
       .then((userData) => {
-        setCurrentUser(userData);
+        setCurrentUser(userData.data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -139,7 +141,7 @@ function App() {
     api
       .addCard(card, token)
       .then((cardData) => {
-        setCards([cardData, ...cards]);
+        setCards([cardData.data, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {
@@ -149,14 +151,15 @@ function App() {
 
   function handleCardLike(card) {
     const token = localStorage.getItem("jwt");
-    const isLiked = card.likes.some((likes) => likes._id === currentUser._id);
+    const isLiked = card.likes.some((userId) => userId === currentUser._id);
 
     if (isLiked) {
       api
         .deleteLike(card._id, token)
         .then((cardData) => {
           setCards((cards) =>
-            cards.map((item) => (item._id === card._id ? cardData : item))
+            cards.map((item) => (item._id === card._id ? cardData : item)),
+            
           );
         })
         .catch((err) => {
@@ -217,10 +220,10 @@ function App() {
   }
 
   function onLogin({ email, password }) {
-    console.log(email);
     auth
       .login(email, password)
       .then((res) => {
+        
         if (res.token) {
           setIsLoggedIn(true);
           setEmail(email);
