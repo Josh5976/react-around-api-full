@@ -20,7 +20,11 @@ const createCard = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError(`${Object.values(err.errors).map((error) => error.message)}`))
+        next(
+          new BadRequestError(
+            `${Object.values(err.errors).map((error) => error.message)}`
+          )
+        );
       } else {
         next(err);
       }
@@ -37,16 +41,18 @@ const deleteCard = (req, res, next) => {
       } else {
         Card.deleteOne(card).then(() => res.send({ data: card }));
       }
+    })
+    .catch((err) => {
+      next(err);
     });
 };
 
 const likeCard = (req, res, next) => {
-  Card
-    .findByIdAndUpdate(
-      req.params.id,
-      { $addToSet: { likes: req.user._id } },
-      { new: true }
-    )
+  Card.findByIdAndUpdate(
+    req.params.id,
+    { $addToSet: { likes: req.user._id } },
+    { new: true }
+  )
     .orFail()
     .then((card) => res.send(card))
     .catch((err) => {
@@ -57,12 +63,11 @@ const likeCard = (req, res, next) => {
 };
 
 const dislikeCard = (req, res, next) => {
-  Card
-    .findByIdAndUpdate(
-      req.params.id,
-      { $pull: { likes: req.user._id } },
-      { new: true }
-    )
+  Card.findByIdAndUpdate(
+    req.params.id,
+    { $pull: { likes: req.user._id } },
+    { new: true }
+  )
     .orFail()
     .then((card) => res.send(card))
     .catch((err) => {

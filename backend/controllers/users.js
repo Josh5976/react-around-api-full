@@ -141,5 +141,5 @@ module.exports = {
   updateUserAvatar,
   updateUserInfo,
   login,
-  getCurrentUser
+  getCurrentUser,
 };

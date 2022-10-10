@@ -4,14 +4,14 @@ const {
   getUser,
   updateUserInfo,
   updateUserAvatar,
-  getCurrentUser
+  getCurrentUser,
 } = require('../controllers/users');
 
 const {
   validateProfile,
   validateObjId,
   validateAvatar,
-  validateUserBody
+  validateUserBody,
 } = require('../middleware/validations');
 
 router.get('/me', validateUserBody, getCurrentUser);

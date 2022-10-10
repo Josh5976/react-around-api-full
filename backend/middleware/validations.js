@@ -98,6 +98,14 @@ const validateAvatar = celebrate({
   }),
 });
 
+const validateUniqueId = celebrate({
+  body: Joi.object().keys({
+    _id: Joi.string().hex().length(24).messages({
+      'any.invalid': 'Invalid Card',
+    }),
+  }),
+});
+
 module.exports = {
   validateObjId,
   validateAuthentication,
@@ -105,4 +113,5 @@ module.exports = {
   validateCardBody,
   validateProfile,
   validateAvatar,
+  validateUniqueId,
 };
